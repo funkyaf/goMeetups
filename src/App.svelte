@@ -8,6 +8,7 @@
   import MeetupDetail from "./Meetups/MeetupDetail.svelte";
   import LoadingSpinner from "./UI/LoadingSpinner.svelte";
   import Error from "./UI/Error.svelte";
+  import { url } from "./config/index";
 
   // let meetups = ;
 
@@ -18,7 +19,7 @@
   let isLoading = true;
   let error;
 
-  fetch("https://gomeetups-d9433.firebaseio.com/meetups.json")
+  fetch(`${url}/api/meetups`)
     .then(res => {
       if (!res.ok) {
         throw new Error("Fetching meetups failed, please try again later!");
@@ -29,8 +30,7 @@
       const loadedMeetups = [];
       for (const key in data) {
         loadedMeetups.push({
-          ...data[key],
-          id: key
+          ...data[key]
         });
       }
       setTimeout(() => {

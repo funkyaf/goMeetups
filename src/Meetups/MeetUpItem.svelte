@@ -4,6 +4,7 @@
   import Button from "../UI/Button.svelte";
   import Badge from "../UI/Badge.svelte";
   import LoadingSpinner from "../UI/LoadingSpinner.svelte";
+  import { url } from "../config";
 
   export let id;
   export let title;
@@ -20,7 +21,7 @@
 
   function toggleFavorite() {
     isLoading = true;
-    fetch(`https://gomeetups-d9433.firebaseio.com/meetups/${id}.json`, {
+    fetch(`${url}/api/meetups/${id}/favToggle`, {
       method: "PATCH",
       body: JSON.stringify({ isFavorite: !isFav }),
       headers: { "Content-Type": "application/json" }

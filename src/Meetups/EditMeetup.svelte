@@ -5,6 +5,7 @@
   import Button from "../UI/Button.svelte";
   import Modal from "../UI/Modal.svelte";
   import { isEmpty, isValidEmail } from "../helpers/validation.js";
+  import { url } from "../config";
 
   export let id = null;
 
@@ -57,7 +58,7 @@
 
     // meetups.push(newMeetup); // DOES NOT WORK!
     if (id) {
-      fetch(`https://gomeetups-d9433.firebaseio.com/meetups/${id}.json`, {
+      fetch(`${url}/api/meetups/${id}`, {
         method: "PATCH",
         body: JSON.stringify(meetupData),
         headers: { "Content-Type": "application/json" }
@@ -72,7 +73,7 @@
           console.log(err);
         });
     } else {
-      fetch("https://gomeetups-d9433.firebaseio.com/meetups.json", {
+      fetch(`${url}/api/meetups`, {
         method: "POST",
         body: JSON.stringify({ ...meetupData, isFavorite: false }),
         headers: { "Content-Type": "application/json" }
@@ -98,7 +99,7 @@
   }
 
   function deleteMeetup() {
-    fetch(`https://gomeetups-d9433.firebaseio.com/meetups/${id}.json`, {
+    fetch(`${url}/api/meetups/${id}`, {
       method: "DELETE"
     })
       .then(res => {

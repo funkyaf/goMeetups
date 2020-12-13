@@ -59,7 +59,7 @@
         title={meetup.title}
         subtitle={meetup.subtitle}
         description={meetup.description}
-        imageUrl={meetup.imageUrl}
+        imageUrl={meetup.imageUrl ? meetup.imageUrl : null}
         email={meetup.contactEmail}
         address={meetup.address}
         isFav={meetup.isFavorite}
